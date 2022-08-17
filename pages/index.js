@@ -1,8 +1,10 @@
-import Head from "next/head";
-import Image from "next/image";
 import Heading from "../components/Heading";
-import styles from "../styles/Home.module.css";
+import styles from "../styles/Home.module.scss";
 
-export default function Home() {
-  return <Heading text="Home" />;
-}
+const Home = () => (
+  <div className={styles.wrapper}>
+    <Heading text="Next.js Application" />
+  </div>
+);
+
+export default Home;

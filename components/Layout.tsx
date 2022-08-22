@@ -1,16 +1,22 @@
 import { FC, ReactNode } from "react";
-import Header from "./Header";
-import Footer from "./Footer";
+import { AppHeader } from "./header";
+import { AppFooter } from "./footer";
 
 type layoutProps = {
   children: ReactNode;
 };
 
+const links = [
+  { id: 1, label: "Home", link: "/" },
+  { id: 2, label: "Posts", link: "/posts" },
+  { id: 3, label: "Contacts", link: "/contacts" },
+];
+
 const Layout: FC<layoutProps> = ({ children }) => (
   <>
-    <Header />
+    <AppHeader links={links} />
     {children}
-    <Footer />
+    <AppFooter links={links} />
   </>
 );
 

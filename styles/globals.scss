@@ -19,33 +19,3 @@ body {
 main {
   padding: 20px;
 }
-
-header,
-footer {
-  min-height: 80px;
-}
-
-header {
-  background-image: linear-gradient(
-    to bottom,
-    rgba(0, 0, 0, 0.459),
-    rgba(0, 0, 0, 0.26)
-  );
-  display: flex;
-  align-items: center;
-  padding: 0 20px;
-}
-
-footer {
-  background-image: linear-gradient(
-    to bottom,
-    rgba(0, 0, 0, 0.459),
-    rgba(0, 0, 0, 0.26)
-  );
-  text-align: center;
-  font-size: 12px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  text-transform: uppercase;
-}

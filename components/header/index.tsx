@@ -4,6 +4,7 @@ import { useDisclosure } from "@mantine/hooks";
 import Image from "next/image";
 import Link from "next/link";
 import { useStyles } from "./styles";
+import { useRouter } from "next/router";
 
 interface AppHeaderProps {
   links: { id: number; link: string; label: string }[];
@@ -11,19 +12,16 @@ interface AppHeaderProps {
 
 export const AppHeader: FC<AppHeaderProps> = ({ links }) => {
   const [opened, { toggle }] = useDisclosure(false);
-  const [active, setActive] = useState(links[0].link);
   const { classes, cx } = useStyles();
+  const { pathname } = useRouter();
 
   const items = links.map(({ id, label, link }) => (
     <Link key={id} href={link}>
       <a
         key={label}
         className={cx(classes.link, {
-          [classes.linkActive]: active === link,
+          [classes.linkActive]: pathname === link,
         })}
-        onClick={(event) => {
-          setActive(link);
-        }}
       >
         {label}
       </a>

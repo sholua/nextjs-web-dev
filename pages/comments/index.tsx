@@ -3,10 +3,7 @@ import useSWR from "swr";
 import { Table, Loader, Center, Container } from "@mantine/core";
 
 function Comments() {
-  const { data, error } = useSWR(
-    "http://localhost:4000/comments",
-    (url: string) => fetch(url).then((r) => r.json())
-  );
+  const { data, error } = useSWR("/comments");
 
   if (error) return <div>failed to load</div>;
   if (!data)

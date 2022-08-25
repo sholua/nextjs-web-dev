@@ -5,14 +5,14 @@ import Link from "next/link";
 import Heading from "../../components/Heading";
 
 import { postType } from "../../types";
+import axios from "axios";
 
 type postsTypeProps = {
   posts: Array<postType>;
 };
 
 export const getStaticProps: GetStaticProps = async () => {
-  const response = await fetch("http://localhost:4000/posts");
-  const data = await response.json();
+  const { data } = await axios.get("/posts");
 
   if (!data) {
     return {

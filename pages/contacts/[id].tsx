@@ -1,3 +1,4 @@
+import axios from "axios";
 import { GetServerSideProps } from "next";
 import Head from "next/head";
 import { FC } from "react";
@@ -11,8 +12,7 @@ type contactTypeProps = {
 
 export const getServerSideProps: GetServerSideProps = async (context) => {
   const { id } = context.params;
-  const response = await fetch(`http://localhost:4000/users/${id}`);
-  const data = await response.json();
+  const { data } = await axios.get(`/users/${id}`);
 
   if (!data) {
     return {

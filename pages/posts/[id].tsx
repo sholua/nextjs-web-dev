@@ -1,6 +1,7 @@
 import { FC } from "react";
 import { GetStaticPaths, GetStaticProps } from "next";
 import Head from "next/head";
+import axios from "axios";
 import PostInfo from "../../components/PostInfo";
 
 import { postType } from "../../types";
@@ -10,8 +11,7 @@ type postTypeProps = {
 };
 
 export const getStaticPaths: GetStaticPaths = async () => {
-  const response = await fetch("https://jsonplaceholder.typicode.com/posts");
-  const data = await response.json();
+  const { data } = await axios.get("/posts");
 
   const paths = data.map(({ id }) => ({
     params: { id: id.toString() },
@@ -25,8 +25,7 @@ export const getStaticPaths: GetStaticPaths = async () => {
 
 export const getStaticProps: GetStaticProps = async (context) => {
   const { id } = context.params;
-  const response = await fetch(`http://localhost:4000/posts/${id}`);
-  const data = await response.json();
+  const { data } = await axios.get(`/posts/${id}`);
 
   if (!data) {
     return {

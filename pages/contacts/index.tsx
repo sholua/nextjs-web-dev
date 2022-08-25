@@ -2,6 +2,7 @@ import { FC } from "react";
 import { GetStaticProps } from "next";
 import Head from "next/head";
 import Link from "next/link";
+import axios from "axios";
 import Heading from "../../components/Heading";
 
 import { contactType } from "../../types";
@@ -11,8 +12,7 @@ type contactsTypeProps = {
 };
 
 export const getStaticProps: GetStaticProps = async () => {
-  const response = await fetch("http://localhost:4000/users");
-  const data = await response.json();
+  const {data} = await axios.get("/users");
 
   if (!data) {
     return {

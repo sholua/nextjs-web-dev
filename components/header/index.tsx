@@ -7,7 +7,11 @@ import { useStyles } from "./styles";
 import { useRouter } from "next/router";
 
 interface AppHeaderProps {
-  links: { id: number; link: string; label: string }[];
+  links: {
+    id: number;
+    link: string;
+    label: { text: string; badge?: JSX.Element };
+  }[];
 }
 
 export const AppHeader: FC<AppHeaderProps> = ({ links }) => {
@@ -18,12 +22,11 @@ export const AppHeader: FC<AppHeaderProps> = ({ links }) => {
   const items = links.map(({ id, label, link }) => (
     <Link key={id} href={link}>
       <a
-        key={label}
         className={cx(classes.link, {
           [classes.linkActive]: pathname === link,
         })}
       >
-        {label}
+        {label.text} <span className={cx(classes.badge)}>{label?.badge}</span>
       </a>
     </Link>
   ));

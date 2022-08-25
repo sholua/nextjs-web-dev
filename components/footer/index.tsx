@@ -3,15 +3,19 @@ import Link from "next/link";
 import { useStyles } from "./styles";
 
 interface AppFooterProps {
-  links: { id: number; link: string; label: string }[];
+  links: {
+    id: number;
+    link: string;
+    label: { text: string; badge?: JSX.Element };
+  }[];
 }
 
 export function AppFooter({ links }: AppFooterProps) {
   const { classes } = useStyles();
   const items = links.map(({ id, label, link }) => (
     <Link key={id} href={link}>
-      <a color="dimmed" key={label} href={link}>
-        {label}
+      <a color="dimmed" key={id} href={link}>
+        {label.text}
       </a>
     </Link>
   ));

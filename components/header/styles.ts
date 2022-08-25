@@ -21,7 +21,7 @@ export const useStyles = createStyles((theme) => ({
   },
 
   link: {
-    display: "block",
+    display: "flex",
     lineHeight: 1,
     padding: "8px 12px",
     borderRadius: theme.radius.sm,
@@ -39,6 +39,11 @@ export const useStyles = createStyles((theme) => ({
           ? theme.colors.dark[6]
           : theme.colors.gray[0],
     },
+  },
+
+  badge: {
+    paddingLeft: 5,
+    marginTop: "-5px",
   },
 
   linkActive: {

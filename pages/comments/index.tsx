@@ -1,43 +1,14 @@
 import React from "react";
-import useSWR from "swr";
-import { Table, Loader, Center, Container } from "@mantine/core";
+import { Container, Divider } from "@mantine/core";
+import { CommentsForm } from "../../components/comments/commentsForm";
+import ComponentsTable from "../../components/comments/commentsTable";
 
 function Comments() {
-  const { data, error } = useSWR("/comments");
-
-  if (error) return <div>failed to load</div>;
-  if (!data)
-    return (
-      <Container style={{ width: 400, height: 200 }}>
-        <Center>
-          <Loader size="lg" variant="dots" />
-        </Center>
-      </Container>
-    );
-
-  const ths = (
-    <tr>
-      <th>ID</th>
-      <th>Title</th>
-      <th>Email</th>
-    </tr>
-  );
-
-  const rows = data.map((comment) => (
-    <tr key={comment.id}>
-      <td>{comment.id}</td>
-      <td>{comment.name}</td>
-      <td>{comment.email}</td>
-    </tr>
-  ));
   return (
     <Container>
-      <Table captionSide="bottom" highlightOnHover>
-        <caption>Some comments...</caption>
-        <thead>{ths}</thead>
-        <tbody>{rows}</tbody>
-        <tfoot>{ths}</tfoot>
-      </Table>
+      <CommentsForm />
+      <Divider my="sm" />
+      <ComponentsTable />
     </Container>
   );
 }

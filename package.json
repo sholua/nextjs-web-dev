@@ -4,7 +4,7 @@
   "private": true,
   "scripts": {
     "dev:next": "next dev",
-    "dev:json-server": "json-server --watch db.json --port 4000 --d 2000",
+    "dev:json-server": "json-server --watch db.json --port 4000",
     "dev": "concurrently npm:dev:*",
     "build": "next build",
     "start": "next start",
@@ -17,6 +17,7 @@
     "@mantine/hooks": "^5.2.3",
     "@mantine/next": "^5.2.3",
     "axios": "^0.27.2",
+    "formik": "^2.2.9",
     "next": "12.2.5",
     "react": "18.2.0",
     "react-dom": "18.2.0",

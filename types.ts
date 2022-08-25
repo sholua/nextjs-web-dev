@@ -22,4 +22,10 @@ export type docType = {
   id: number;
   icon: string;
   path: string;
-}
+};
+
+export type commentType = {
+  id: number;
+  name: string;
+  email: string;
+};

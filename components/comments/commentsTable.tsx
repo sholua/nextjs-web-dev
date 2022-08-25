@@ -1,11 +1,15 @@
-import React from "react";
+import React, { FC } from "react";
 import { Table, Loader, Center, Container } from "@mantine/core";
 import useSWR from "swr";
 
 import { commentType } from "../../types";
 
-function ComponentsTable() {
-  const { data, error } = useSWR<commentType[]>("/comments");
+const CommentsTable: FC<{
+  commentsFromServer: Array<commentType>;
+}> = ({ commentsFromServer }) => {
+  const { data, error } = useSWR<commentType[]>("/comments", {
+    fallbackData: commentsFromServer,
+  });
 
   if (error) return <div>failed to load</div>;
   if (!data)
@@ -41,6 +45,6 @@ function ComponentsTable() {
       <tfoot>{ths}</tfoot>
     </Table>
   );
-}
+};
 
-export default ComponentsTable;
+export default CommentsTable;

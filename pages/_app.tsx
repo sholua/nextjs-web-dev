@@ -1,33 +1,49 @@
 import { AppProps } from "next/app";
 import Layout from "../components/Layout";
-import { MantineProvider } from "@mantine/core";
+import {
+  MantineProvider,
+  ColorSchemeProvider,
+  ColorScheme,
+} from "@mantine/core";
 import "../styles/globals.scss";
 import axios from "axios";
 import { SWRConfig } from "swr";
+import { useState } from "react";
 
 axios.defaults.baseURL = "http://localhost:4000";
 
-const MyApp = ({ Component, pageProps }: AppProps) => (
-  <MantineProvider
-    withGlobalStyles
-    withNormalizeCSS
-    theme={{
-      colorScheme: "light",
-    }}
-  >
-    <SWRConfig
-      value={{
-        dedupingInterval: 5000,
-        fetcher: (url: string) => axios(url).then((r) => r.data),
-      }}
+const MyApp = ({ Component, pageProps }: AppProps) => {
+  const [colorScheme, setColorScheme] = useState<ColorScheme>("light");
+  const toggleColorScheme = (value?: ColorScheme) =>
+    setColorScheme(value || (colorScheme === "dark" ? "light" : "dark"));
+
+  return (
+    <ColorSchemeProvider
+      colorScheme={colorScheme}
+      toggleColorScheme={toggleColorScheme}
     >
-      <Layout>
-        <main>
-          <Component {...pageProps} />
-        </main>
-      </Layout>
-    </SWRConfig>
-  </MantineProvider>
-);
+      <MantineProvider
+        withGlobalStyles
+        withNormalizeCSS
+        theme={{
+          colorScheme,
+        }}
+      >
+        <SWRConfig
+          value={{
+            dedupingInterval: 5000,
+            fetcher: (url: string) => axios(url).then((r) => r.data),
+          }}
+        >
+          <Layout>
+            <main>
+              <Component {...pageProps} />
+            </main>
+          </Layout>
+        </SWRConfig>
+      </MantineProvider>
+    </ColorSchemeProvider>
+  );
+};
 
 export default MyApp;

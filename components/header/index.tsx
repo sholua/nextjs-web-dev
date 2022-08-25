@@ -5,6 +5,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { useStyles } from "./styles";
 import { useRouter } from "next/router";
+import { SwitchToggle } from "../switch-toggle";
 
 interface AppHeaderProps {
   links: {
@@ -37,6 +38,9 @@ export const AppHeader: FC<AppHeaderProps> = ({ links }) => {
         <Link href="/">
           <Image src="/logo.png" width={48} height={60} alt="logo" />
         </Link>
+
+        <SwitchToggle />
+
         <Group spacing={5} className={classes.links}>
           {items}
         </Group>

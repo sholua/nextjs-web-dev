@@ -3,7 +3,9 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "next dev",
+    "dev:next": "next dev",
+    "dev:json-server": "json-server --watch db.json --port 4000",
+    "dev": "concurrently npm:dev:*",
     "build": "next build",
     "start": "next start",
     "lint": "next lint"
@@ -23,6 +25,8 @@
     "@types/node": "^18.7.6",
     "@types/react": "^18.0.17",
     "eslint": "8.22.0",
-    "eslint-config-next": "12.2.5"
+    "eslint-config-next": "12.2.5",
+    "concurrently": "^7.3.0",
+    "json-server": "^0.17.0"
   }
 }

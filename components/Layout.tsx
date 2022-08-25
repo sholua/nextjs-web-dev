@@ -39,6 +39,18 @@ const links = [
     },
     link: "/contacts",
   },
+  {
+    id: 4,
+    label: {
+      text: "Comments",
+      badge: (
+        <Badge color="indigo" size="xs" variant="filled">
+          use_SWR
+        </Badge>
+      ),
+    },
+    link: "/comments",
+  },
 ];
 
 const Layout: FC<layoutProps> = ({ children }) => (

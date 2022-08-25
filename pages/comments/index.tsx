@@ -1,6 +1,7 @@
 import React from "react";
 import { Container, Divider } from "@mantine/core";
 import axios from "axios";
+import Head from "next/head";
 import { CommentsForm } from "../../components/comments/commentsForm";
 import CommentsTable from "../../components/comments/commentsTable";
 import { NextPage } from "next";
@@ -13,6 +14,9 @@ interface Props {
 const Comments: NextPage<Props> = ({ commentsFromServer }) => {
   return (
     <Container>
+      <Head>
+        <title>Comments</title>
+      </Head>
       <CommentsForm />
       <Divider my="sm" />
       <CommentsTable commentsFromServer={commentsFromServer} />

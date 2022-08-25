@@ -16,7 +16,10 @@ const MyApp = ({ Component, pageProps }: AppProps) => (
     }}
   >
     <SWRConfig
-      value={{ fetcher: (url: string) => axios(url).then((r) => r.data) }}
+      value={{
+        dedupingInterval: 5000,
+        fetcher: (url: string) => axios(url).then((r) => r.data),
+      }}
     >
       <Layout>
         <main>

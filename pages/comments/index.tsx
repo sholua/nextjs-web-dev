@@ -25,7 +25,7 @@ const Comments: NextPage<Props> = ({ commentsFromServer }) => {
 };
 
 Comments.getInitialProps = async (ctx) => {
-  const res = await axios("/comments");
+  const res = await axios("/comments?_limit=2");
   const json = res.data;
   return { commentsFromServer: json };
 };

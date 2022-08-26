@@ -4,7 +4,7 @@
   "private": true,
   "scripts": {
     "dev:next": "next dev",
-    "dev:json-server": "json-server --watch db.json --port 4000",
+    "dev:json-server": "json-server --watch db.json --port 4000 --d 3000",
     "dev": "concurrently npm:dev:*",
     "build": "next build",
     "start": "next start",

@@ -1,15 +1,23 @@
-import React, { FC } from "react";
-import { Table, Loader, Center, Container } from "@mantine/core";
+import React, { FC, useState } from "react";
+import { Table, Loader, Center, Container, Pagination } from "@mantine/core";
 import useSWR from "swr";
 
 import { commentType } from "../../types";
+import { AxiosResponseHeaders } from "axios";
 
 const CommentsTable: FC<{
   commentsFromServer: Array<commentType>;
 }> = ({ commentsFromServer }) => {
-  const { data, error } = useSWR<commentType[]>("/comments", {
-    fallbackData: commentsFromServer,
-  });
+  const [activePage, setPage] = useState(1);
+  const {
+    data: { data, headers },
+    error,
+  } = useSWR<{ data: commentType[]; headers?: AxiosResponseHeaders }>(
+    `/comments?_limit=2&_page=${activePage}`,
+    {
+      fallbackData: { data: commentsFromServer },
+    }
+  );
 
   if (error) return <div>failed to load</div>;
   if (!data)
@@ -37,13 +45,18 @@ const CommentsTable: FC<{
     </tr>
   ));
 
+  const pagesCount = headers ? Math.ceil(+headers["x-total-count"] / 2) : 3;
+
   return (
-    <Table captionSide="bottom" highlightOnHover>
-      <caption>Some comments...</caption>
-      <thead>{ths}</thead>
-      <tbody>{rows}</tbody>
-      <tfoot>{ths}</tfoot>
-    </Table>
+    <>
+      <Table captionSide="bottom" highlightOnHover>
+        <caption>Some comments...</caption>
+        <thead>{ths}</thead>
+        <tbody>{rows}</tbody>
+        <tfoot>{ths}</tfoot>
+      </Table>
+      <Pagination page={activePage} onChange={setPage} total={pagesCount} />
+    </>
   );
 };
 
